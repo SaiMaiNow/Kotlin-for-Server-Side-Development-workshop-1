@@ -3,6 +3,16 @@ package org.example
 // 1. กำหนด data class สำหรับเก็บข้อมูลสินค้า
 data class Product(val name: String, val price: Double, val category: String)
 
+val products = listOf(
+    Product(name = "Laptop", price = 35000.0, category = "Electronics"),
+    Product(name = "Smartphone", price = 25000.0, category = "Electronics"),
+    Product(name = "T-shirt", price = 450.0, category = "Apparel"),
+    Product(name = "Monitor", price = 7500.0, category = "Electronics"),
+    Product(name = "Keyboard", price = 499.0, category = "Electronics"),
+    Product(name = "Jeans", price = 1200.0, category = "Apparel"),
+    Product(name = "Headphones", price = 1800.0, category = "Electronics"),
+);
+
 fun main() {
     // 2. สร้างรายการสินค้าตัวอย่าง (List<Product>)
     // สินค้า name = "Laptop", price = 35000.0, category = "Electronics"
@@ -12,15 +22,6 @@ fun main() {
     // สินค้า name = "Keyboard", price = 499.0, category = "Electronics" // ราคาไม่เกิน 500
     // สินค้า name = "Jeans", price = 1200.0, category = "Apparel"
     // สินค้า name = "Headphones", price = 1800.0, category = "Electronics" // ตรงตามเงื่อนไข
-    val products = listOf(
-        Product(name = "Laptop", price = 35000.0, category = "Electronics"),
-        Product(name = "Smartphone", price = 25000.0, category = "Electronics"),
-        Product(name = "T-shirt", price = 450.0, category = "Apparel"),
-        Product(name = "Monitor", price = 7500.0, category = "Electronics"),
-        Product(name = "Keyboard", price = 499.0, category = "Electronics"),
-        Product(name = "Jeans", price = 1200.0, category = "Apparel"),
-        Product(name = "Headphones", price = 1800.0, category = "Electronics"),
-    );
 
     println("รายการสินค้าทั้งหมด:")
     products.forEach { println(it) }
@@ -73,4 +74,16 @@ fun main() {
 //    println("   - เช่น: 'Laptop' จะถูก filter category -> filter price -> map price จากนั้น 'Smartphone' ถึงจะเริ่มทำกระบวนการเดียวกัน")
 //    println("   - จะไม่มีการสร้าง Collection กลางทาง ทำให้ประหยัดหน่วยความจำและเร็วกว่ามากสำหรับชุดข้อมูลขนาดใหญ่ เพราะทำงานกับข้อมูลทีละชิ้นและทำทุกขั้นตอนให้เสร็จในรอบเดียว")
 //    println("   - การคำนวณจะเกิดขึ้นเมื่อมี 'Terminal Operation' มาเรียกใช้เท่านั้น (ในที่นี้คือ .sum())")
+}
+
+fun calculateTotalElectronicsPriceOver500(): Double{
+    val totalElecPriceOver500 = products.asSequence().filter { it.price > 500 && it.category == "Electronics" }.sumByDouble { it.price }
+
+    return totalElecPriceOver500
+}
+
+fun Countitem(): Int{
+    val totalElecPriceOver500 = products.asSequence().filter { it.price > 500 && it.category == "Electronics" }
+
+    return totalElecPriceOver500.count()
 }
